@@ -7,6 +7,7 @@
 
 #include <jni.h>
 #include "Log.h"
+#include <string>
 
 void dynamicNative1(JNIEnv *env, jobject jobj);
 
@@ -16,9 +17,11 @@ jstring dynamicNative2(JNIEnv *env, jobject jobj, jint i);
  * @brief 动态注册的方法
  * */
 static const JNINativeMethod nativeMethods[] = {
-        {"", "()v",                  (void *) dynamicNative1},
-        {"", "(I)Ljava/lang/String", (void *) dynamicNative2},
+        {"dynamicNative", "()V",                   (void *) dynamicNative1},
+        {"dynamicNative", "(I)Ljava/lang/String;", (void *) dynamicNative2},
 };
+
+static const char *mClassName = "com/example/jnilearn/MainActivity";
 
 /**
  * @brief Java层调用System.load后执行
@@ -31,7 +34,14 @@ JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved) {
         LOGE("Get Java Env Fail");
         return -1;
     }
-
+    jclass mActivityCls = env->FindClass(mClassName);
+    //将mActivityCls中native方法与nativeMethods进行绑定，其实就是
+    //遍历mActivityCls中的声明的native方法与nativeMethods中的name字段进行匹配
+    ret = env->RegisterNatives(mActivityCls, nativeMethods, 2);
+    if (ret != JNI_OK) {
+        return -1;
+    }
+    return JNI_VERSION_1_6;
 }
 
 

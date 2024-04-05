@@ -2,7 +2,6 @@ package com.example.jnilearn
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.TextView
 import com.example.jnilearn.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -17,6 +16,9 @@ class MainActivity : AppCompatActivity() {
 
         // Example of a call to a native method
         binding.sampleText.text = stringFromJNI()
+
+        dynamicNative();
+        dynamicNative(123);
     }
 
     /**
@@ -24,6 +26,8 @@ class MainActivity : AppCompatActivity() {
      * which is packaged with this application.
      */
     external fun stringFromJNI(): String
+    external fun dynamicNative();
+    external fun dynamicNative(i: Int): String
 
     companion object {
         // Used to load the 'jnilearn' library on application startup.

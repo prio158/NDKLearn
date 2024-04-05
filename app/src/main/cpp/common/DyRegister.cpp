@@ -4,11 +4,14 @@
 #include "DyRegister.h"
 
 void dynamicNative1(JNIEnv *env, jobject jobj) {
-    LOGE("dynamicNative1 动态注册");
+    LOGI("dynamicNative1 动态注册");
 }
 
 jstring dynamicNative2(JNIEnv *env, jobject jobj, jint i) {
-    return env->NewStringUTF("我是动态注册的dynamicNative2方法");
+    auto num = std::to_string(i);
+    auto str = "dynamicNative2 动态注册, num:" + num;
+    LOGI("%s", str.c_str());
+    return env->NewStringUTF("动态注册的dynamicNative2方法");
 }
 
 
