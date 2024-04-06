@@ -24,7 +24,7 @@ static const JNINativeMethod nativeMethods[] = {
 static const char *mClassName = "com/example/jnilearn/MainActivity";
 
 /**
- * @brief Java层调用System.load后执行
+ * @brief 该方法在Java层调用System.load后执行
  * 此时作为动态注册的时机
  * */
 JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved) {
