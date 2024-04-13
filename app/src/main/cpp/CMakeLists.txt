@@ -19,7 +19,7 @@ add_library(${CMAKE_PROJECT_NAME} SHARED
         common/Log.h
         common/DyRegister.h
         common/DyRegister.cpp
-        native-lib.cpp
+        JniLearn.cpp
 
 )
 
